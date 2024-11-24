@@ -50,24 +50,18 @@ const CreateTodoForm: FC<Props> = ({ onCreate, tags, isLoading }) => {
       }
     >
       <Form.TextField id="title" title="Task Name" />
-      <Form.Dropdown id="difficulty" title="Difficulty" defaultValue="Easy">
-        <Form.Dropdown.Item value="Trivial" title="Trivial" icon={Icon.Stars} />
-        <Form.Dropdown.Item value="Easy" title="Easy" icon={Icon.Stars} />
-        <Form.Dropdown.Item value="Medium" title="Medium" icon={Icon.Stars} />
-        <Form.Dropdown.Item value="Hard" title="Hard" icon={Icon.Stars} />
-      </Form.Dropdown>
-      <Form.Dropdown id="type" title="Type" defaultValue="todo">
-        <Form.Dropdown.Item value="todo" title="To Do's" icon={Icon.Pencil} />
-        <Form.Dropdown.Item value="daily" title="Dailies" icon={Icon.Alarm} />
-        <Form.Dropdown.Item value="habit" title="Habits" icon={Icon.Clock} />
-        <Form.Dropdown.Item value="reward" title="Rewards" icon={Icon.Coin} />
-      </Form.Dropdown>
       <Form.DatePicker id="date" title="Date" />
       <Form.TagPicker id="tags" title="Tags">
         {tags.map((tag) => (
           <Form.TagPicker.Item key={tag.id} value={tag.id} title={tag.name} />
         ))}
       </Form.TagPicker>
+      <Form.Dropdown id="difficulty" title="Difficulty" defaultValue="Easy">
+        <Form.Dropdown.Item value="Trivial" title="Trivial" icon={Icon.Stars} />
+        <Form.Dropdown.Item value="Easy" title="Easy" icon={Icon.Stars} />
+        <Form.Dropdown.Item value="Medium" title="Medium" icon={Icon.Stars} />
+        <Form.Dropdown.Item value="Hard" title="Hard" icon={Icon.Stars} />
+      </Form.Dropdown>
     </Form>
   );
 };
