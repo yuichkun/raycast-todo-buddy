@@ -16,8 +16,6 @@ export enum HabiticaTaskDifficulty {
 }
 
 export interface Preferences {
-  HABITICA_USER_ID: string;
-  HABITICA_API_KEY: string;
   language: string;
 }
 

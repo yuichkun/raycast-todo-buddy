@@ -25,20 +25,6 @@
   ],
   "preferences": [
     {
-      "name": "HABITICA_USER_ID",
-      "title": "Habitica User ID",
-      "description": "Habitica's User ID",
-      "type": "textfield",
-      "required": true
-    },
-    {
-      "name": "HABITICA_API_KEY",
-      "title": "Habitica API Key",
-      "description": "Habitica's API Key",
-      "type": "password",
-      "required": true
-    },
-    {
       "name": "language",
       "title": "Language",
       "description": "Language",
