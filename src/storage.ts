@@ -11,6 +11,7 @@ import {
   changeDifficultyOfATaskInStorage,
   updateTaskInStorage,
   deleteTagInStorage,
+  renameTagInStorage,
 } from "./repository/localStorage";
 import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
@@ -64,6 +65,11 @@ export async function getAllTags(): Promise<Tag[]> {
 export async function createTag(tag: Tag) {
   console.log("createTag", tag);
   return createTagInStorage(tag);
+}
+
+export async function renameTag(tagId: string, name: string) {
+  console.log("renameTag", tagId, name);
+  return renameTagInStorage(tagId, name);
 }
 
 export async function updateTags(taskId: string, tags: string[]) {

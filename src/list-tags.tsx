@@ -4,6 +4,7 @@ import { useCachedPromise } from "@raycast/utils";
 import { nameToColor } from "./nameToColor";
 import { deleteTag, getAllTags } from "./storage";
 import { Tag } from "./types";
+import { RenameTag } from "./RenameTag";
 
 export default function Command() {
   const { data: tags, revalidate } = useCachedPromise(getAllTags, [], {
@@ -43,6 +44,15 @@ export default function Command() {
           actions={
             <ActionPanel>
               <ActionPanel.Submenu title="Edit">
+                <Action.Push
+                  title="Rename Tag"
+                  icon={Icon.Pencil}
+                  shortcut={{
+                    key: "r",
+                    modifiers: ["cmd", "shift"],
+                  }}
+                  target={<RenameTag tag={tag} revalidate={revalidate} />}
+                />
                 <Action
                   title="Delete Tag"
                   icon={Icon.DeleteDocument}
