@@ -2,7 +2,7 @@
 
 **Supercharge Your Productivity with Lightning-Fast Task Management in Raycast**
 
-![demo](./screenshots/demo.gif)
+![demo](./media/demo.gif)
 
 TODO Buddy brings a powerful, blazing-fast todo list directly into your Raycast app, seamlessly integrating task management into your workflow without missing a beat.
 
@@ -20,13 +20,13 @@ TODO Buddy brings a powerful, blazing-fast todo list directly into your Raycast 
 
 Create new tasks effortlessly with the `Create Task` command. Fill in details like task name, due date, tags, and priority level (Trivial, Medium, Hard) to keep your tasks organized from the get-go.
 
-![add-task](./screenshots/create-task.png)
+![add-task](./media/create-task.png)
 
 ### 🔍 Advanced Search & Filtering
 
 Filter your tasks in real-time by typing keywords related to task names, tags, due dates, or priority levels. Refine your task list to focus on what's important right now.
 
-![list-tasks](./screenshots/search.png)
+![list-tasks](./media/search.png)
 
 ### 📅 Intelligent Sorting
 
@@ -36,7 +36,7 @@ Sort your tasks by due date to prioritize upcoming deadlines or by priority leve
 
 Tags are automatically assigned unique colors based on their names, making it easier to visually parse your task list.
 
-![list-tags](./screenshots/tags.png)
+![list-tags](./media/tags.png)
 
 ### 🔄 Easy Data Export/Import
 
