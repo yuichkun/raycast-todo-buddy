@@ -16,7 +16,7 @@ export interface Preferences {
   language: string;
 }
 
-export type HabiticaTask = {
+export type Task = {
   id: string;
   text: string;
   date: string | null;
@@ -26,7 +26,7 @@ export type HabiticaTask = {
 
 // remove this type and just use tasks
 export type HabiticaItems = {
-  tasks: HabiticaTask[];
+  tasks: Task[];
 };
 
 export type GetTagResponse = {

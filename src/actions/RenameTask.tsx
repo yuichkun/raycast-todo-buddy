@@ -1,10 +1,10 @@
 import { Action, ActionPanel, Form, showToast, useNavigation } from "@raycast/api";
 import { FC } from "react";
 import { renameTask } from "../storage";
-import { HabiticaTask } from "../types";
+import { Task } from "../types";
 
 type RenameTaskProps = {
-  item: HabiticaTask;
+  item: Task;
   refetchList: () => void;
 };
 export const RenameTask: FC<RenameTaskProps> = ({ item: item, refetchList }) => {

@@ -2,10 +2,10 @@ import { Action, ActionPanel, Form, showToast, useNavigation } from "@raycast/ap
 import { useCachedPromise } from "@raycast/utils";
 import { FC } from "react";
 import { getAllTags, updateTags } from "../storage";
-import { HabiticaTask } from "../types";
+import { Task } from "../types";
 
 type ChangeTagsProps = {
-  item: HabiticaTask;
+  item: Task;
   refetchList: () => void;
 };
 export const ChangeTags: FC<ChangeTagsProps> = ({ item: item, refetchList }) => {

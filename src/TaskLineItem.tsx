@@ -6,10 +6,10 @@ import { determinePriority } from "./date";
 import { nameToColor } from "./nameToColor";
 import { priorityToColor } from "./priorityToColor";
 import { findTags } from "./tag";
-import { HabiticaTask, Tag } from "./types";
+import { Task, Tag } from "./types";
 
 type Props = {
-  task: HabiticaTask;
+  task: Task;
   refetchList: () => void;
   allTags: Tag[];
 };

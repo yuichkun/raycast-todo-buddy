@@ -3,17 +3,17 @@ import { FC } from "react";
 import { getConfig } from "../config";
 import { completeTask, deleteTask, updateDueDate } from "../storage";
 import { playSound } from "../sound";
-import { HabiticaTask } from "../types";
+import { Task } from "../types";
 import { ChangeTags } from "./ChangeTags";
 import { RenameTask } from "./RenameTask";
 type Props = {
-  item: HabiticaTask;
+  item: Task;
   refetchList: () => void;
 };
 
 export const HabiticaEditMenu: FC<Props> = ({ item, refetchList }) => {
   const { language } = getConfig();
-  const handleComplete = async (task: HabiticaTask) => {
+  const handleComplete = async (task: Task) => {
     try {
       await showToast({ title: "Completing Task...", message: task.text });
       await completeTask(task.id);
@@ -26,7 +26,7 @@ export const HabiticaEditMenu: FC<Props> = ({ item, refetchList }) => {
       throw e;
     }
   };
-  const handleUpdateDate = async (task: HabiticaTask, date: Date | null) => {
+  const handleUpdateDate = async (task: Task, date: Date | null) => {
     try {
       await showToast({
         title: "Updating Task Due Date",
@@ -41,7 +41,7 @@ export const HabiticaEditMenu: FC<Props> = ({ item, refetchList }) => {
       throw e;
     }
   };
-  const handleDelete = async (task: HabiticaTask) => {
+  const handleDelete = async (task: Task) => {
     try {
       await showToast({
         title: "Deleting the task",
