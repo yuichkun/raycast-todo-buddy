@@ -24,18 +24,9 @@ export type HabiticaTask = {
   type: "todo";
 };
 
-export type HabiticaDaily = {
-  id: string;
-  text: string;
-  tags: string[];
-  isDue: boolean;
-  completed: boolean;
-  type: "daily";
-};
-
+// remove this type and just use tasks
 export type HabiticaItems = {
   tasks: HabiticaTask[];
-  dailys: HabiticaDaily[];
 };
 
 export type GetTagResponse = {

@@ -11,10 +11,8 @@ export function useSearch(unfilteredItems: HabiticaItems, allTags: Tag[]) {
       return;
     }
     const tasks = searchItems(unfilteredItems.tasks, allTags, searchText);
-    const dailys = searchItems(unfilteredItems.dailys, allTags, searchText);
     setFilteredItems({
       tasks,
-      dailys,
     });
   }, [searchText, unfilteredItems]);
   return {

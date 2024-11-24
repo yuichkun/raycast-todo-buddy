@@ -1,6 +1,6 @@
-import { HabiticaDaily, HabiticaTask, Tag } from "./types";
+import { HabiticaTask, Tag } from "./types";
 
-export function findTags(task: HabiticaTask | HabiticaDaily, allTags: Tag[]) {
+export function findTags(task: HabiticaTask, allTags: Tag[]) {
   const tags: Tag[] = task.tags
     .map((tagId) => {
       return allTags.find((tag) => tag.id === tagId);

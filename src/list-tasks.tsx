@@ -11,7 +11,6 @@ const Command = () => {
   const initialData = useMemo(() => {
     return {
       tasks: [],
-      dailys: [],
     } as HabiticaItems;
   }, []);
 

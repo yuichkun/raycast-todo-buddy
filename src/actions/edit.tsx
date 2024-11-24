@@ -3,31 +3,22 @@ import { FC } from "react";
 import { getConfig } from "../config";
 import { completeTask, deleteTask, updateDueDate } from "../habitica";
 import { playSound } from "../sound";
-import { HabiticaDaily, HabiticaTask } from "../types";
+import { HabiticaTask } from "../types";
 import { ChangeTags } from "./ChangeTags";
 import { RenameTask } from "./RenameTask";
 type Props = {
-  item: HabiticaTask | HabiticaDaily;
+  item: HabiticaTask;
   refetchList: () => void;
 };
 
-function isHabiticaTask(item: HabiticaTask | HabiticaDaily): item is HabiticaTask {
-  if (item.type === "todo") return true;
-  return false;
-}
-
 export const HabiticaEditMenu: FC<Props> = ({ item, refetchList }) => {
   const { language } = getConfig();
-  const handleComplete = async (task: HabiticaTask | HabiticaDaily) => {
+  const handleComplete = async (task: HabiticaTask) => {
     try {
       await showToast({ title: "Completing Task...", message: task.text });
       await completeTask(task.id);
       refetchList();
-      if (isHabiticaTask(item)) {
-        playSound("todo.mp3");
-      } else {
-        playSound("daily.mp3");
-      }
+      playSound("todo.mp3");
     } catch (e) {
       if (e instanceof Error) {
         await showToast({ title: "Failed:", message: e.message });
@@ -50,7 +41,7 @@ export const HabiticaEditMenu: FC<Props> = ({ item, refetchList }) => {
       throw e;
     }
   };
-  const handleDelete = async (task: HabiticaTask | HabiticaDaily) => {
+  const handleDelete = async (task: HabiticaTask) => {
     try {
       await showToast({
         title: "Deleting the task",
@@ -76,18 +67,16 @@ export const HabiticaEditMenu: FC<Props> = ({ item, refetchList }) => {
         }}
         onAction={() => handleComplete(item)}
       />
-      {isHabiticaTask(item) && (
-        <Action.PickDate
-          title="Set Date"
-          shortcut={{
-            key: "d",
-            modifiers: ["cmd", "shift"],
-          }}
-          onChange={(date) => {
-            handleUpdateDate(item, date);
-          }}
-        />
-      )}
+      <Action.PickDate
+        title="Set Date"
+        shortcut={{
+          key: "d",
+          modifiers: ["cmd", "shift"],
+        }}
+        onChange={(date) => {
+          handleUpdateDate(item, date);
+        }}
+      />
       <Action.Push
         title="Rename Task"
         icon={Icon.Tag}
