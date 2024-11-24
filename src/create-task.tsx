@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Form, showToast, Toast, useNavigation } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { FC } from "react";
-import { DifficultyIconMap } from "./constants";
+import { DifficultyColorMap, DifficultyIconMap } from "./constants";
 import ListTasks from "./list-tasks";
 import { createTask, getAllTags } from "./storage";
 import { Tag, Task } from "./types";
@@ -67,9 +67,30 @@ const CreateTodoForm: FC<Props> = ({ onCreate, tags, isLoading }) => {
         ))}
       </Form.TagPicker>
       <Form.Dropdown id="difficulty" title="Level" defaultValue="Trivial">
-        <Form.Dropdown.Item value="Trivial" title="Trivial" icon={DifficultyIconMap.Trivial} />
-        <Form.Dropdown.Item value="Medium" title="Medium" icon={DifficultyIconMap.Medium} />
-        <Form.Dropdown.Item value="Hard" title="Hard" icon={DifficultyIconMap.Hard} />
+        <Form.Dropdown.Item
+          value="Trivial"
+          title="Trivial"
+          icon={{
+            source: DifficultyIconMap.Trivial,
+            tintColor: DifficultyColorMap.Trivial,
+          }}
+        />
+        <Form.Dropdown.Item
+          value="Medium"
+          title="Medium"
+          icon={{
+            source: DifficultyIconMap.Medium,
+            tintColor: DifficultyColorMap.Medium,
+          }}
+        />
+        <Form.Dropdown.Item
+          value="Hard"
+          title="Hard"
+          icon={{
+            source: DifficultyIconMap.Hard,
+            tintColor: DifficultyColorMap.Hard,
+          }}
+        />
       </Form.Dropdown>
     </Form>
   );

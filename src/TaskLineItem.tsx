@@ -7,7 +7,7 @@ import { nameToColor } from "./nameToColor";
 import { priorityToColor } from "./priorityToColor";
 import { findTags } from "./tag";
 import { Task, Tag } from "./types";
-import { DifficultyIconMap } from "./constants";
+import { DifficultyIconMap, DifficultyColorMap } from "./constants";
 
 type Props = {
   task: Task;
@@ -18,6 +18,14 @@ type Props = {
 export const TaskLineItem: FC<Props> = ({ task, refetchList, allTags }) => {
   const { language } = getConfig();
   const tags = findTags(task, allTags);
+
+  const getDifficultyColor = () => {
+    // If the task is completed, always use green color
+    if (task.completed) {
+      return Color.Green;
+    }
+    return DifficultyColorMap[task.difficulty as keyof typeof DifficultyColorMap];
+  };
   return (
     <List.Item
       icon={
@@ -37,7 +45,10 @@ export const TaskLineItem: FC<Props> = ({ task, refetchList, allTags }) => {
       }
       accessories={[
         {
-          icon: task.difficulty ? DifficultyIconMap[task.difficulty as keyof typeof DifficultyIconMap] : null,
+          icon: {
+            source: DifficultyIconMap[task.difficulty as keyof typeof DifficultyIconMap],
+            tintColor: getDifficultyColor(),
+          },
         },
         ...tags.map((tag) => ({
           tag: {
