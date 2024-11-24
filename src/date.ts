@@ -10,8 +10,8 @@ export enum Priority {
 }
 
 export function determinePriority(date: string): Priority {
-  const now = moment.utc().startOf("day");
-  const targetDate = moment.utc(date).startOf("day");
+  const now = moment().startOf("day");
+  const targetDate = moment(date).startOf("day");
 
   if (targetDate.isBefore(now)) {
     return Priority.High;
