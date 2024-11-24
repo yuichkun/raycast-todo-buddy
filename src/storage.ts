@@ -1,4 +1,5 @@
-import { getAllTasks } from "./repository/localStorage";
+import { createTaskInStorage, getAllTasks } from "./repository/localStorage";
+import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
 
 type CreateTaskArgs = {
@@ -8,8 +9,8 @@ type CreateTaskArgs = {
   tags?: string[];
 };
 export function createTask({ text, difficulty, date, tags }: CreateTaskArgs) {
-  // TODO: implement
   console.log("createTask", text, difficulty, date, tags);
+  return createTaskInStorage({ id: uuidv4(), text, difficulty, date, tags: tags ?? [] });
 }
 
 export async function retrieveAllItems(): Promise<Task[]> {

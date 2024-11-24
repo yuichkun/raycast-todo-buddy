@@ -12,7 +12,8 @@ export interface Preferences {
 export type Task = {
   id: string;
   text: string;
-  date: string | null;
+  difficulty: string;
+  date: string | undefined;
   tags: string[];
 };
 
