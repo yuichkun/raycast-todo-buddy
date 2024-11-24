@@ -1,3 +1,4 @@
+import { getAllTasks } from "./repository/localStorage";
 import { Tag, Task } from "./types";
 
 type CreateTaskArgs = {
@@ -12,9 +13,8 @@ export function createTask({ text, difficulty, date, tags }: CreateTaskArgs) {
 }
 
 export async function retrieveAllItems(): Promise<Task[]> {
-  // TODO: implement
   console.log("retrieveAllItems");
-  return [];
+  return getAllTasks();
 }
 
 export async function completeTask(taskId: string) {
