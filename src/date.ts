@@ -39,3 +39,12 @@ export function sortByDate(a: Task, b: Task) {
     return 0;
   }
 }
+
+export function sortByLevel(a: Task, b: Task) {
+  const difficultyOrder = ["Trivial", "Medium", "Hard"];
+
+  const aIndex = difficultyOrder.indexOf(a.difficulty);
+  const bIndex = difficultyOrder.indexOf(b.difficulty);
+
+  return aIndex - bIndex;
+}
