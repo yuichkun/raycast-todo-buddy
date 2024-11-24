@@ -1,12 +1,12 @@
-# Raycast TODO Buddy
+# TODO Buddy
 
 **Supercharge Your Productivity with Lightning-Fast Task Management in Raycast**
 
 ![demo](./screenshots/demo.gif)
 
-Raycast TODO Buddy brings a powerful, blazing-fast todo list directly into your Raycast app, seamlessly integrating task management into your workflow without missing a beat.
+TODO Buddy brings a powerful, blazing-fast todo list directly into your Raycast app, seamlessly integrating task management into your workflow without missing a beat.
 
-## 🚀 Why Raycast TODO Buddy?
+## 🚀 Why TODO Buddy?
 
 - **Ultra-Fast Task Creation**: Add tasks in seconds without ever leaving your keyboard.
 - **Powerful Search & Filtering**: Quickly find tasks by name, tags, due dates, or priority levels.
@@ -54,8 +54,8 @@ Backup your tasks or migrate to another machine effortlessly using the `Export D
 ## 🔧 Installation
 
 1. **Prerequisites**: Ensure you have [Raycast](https://www.raycast.com/) installed on your Mac.
-2. **Install Extension**: Download or clone the Raycast TODO Buddy extension [from GitHub](https://github.com/yuichkun/raycast-todo-buddy).
-3. **Add to Raycast**: Open Raycast, go to Extensions, and add the Raycast TODO Buddy extension.
+2. **Install Extension**: Download or clone the TODO Buddy extension [from GitHub](https://github.com/yuichkun/raycast-todo-buddy).
+3. **Add to Raycast**: Open Raycast, go to Extensions, and add the TODO Buddy extension.
 4. **Start Using**: Trigger Raycast and type any of the commands to start managing your tasks!
 
 ## 📝 Usage Tips
@@ -76,4 +76,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Boost your productivity and keep your tasks at your fingertips with Raycast TODO Buddy!
+Boost your productivity and keep your tasks at your fingertips with TODO Buddy!

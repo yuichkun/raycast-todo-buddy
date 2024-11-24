@@ -1,3 +1,3 @@
-# Raycast TODO Buddy Changelog
+# TODO Buddy Changelog
 
 ## [Initial Version] - 2024-11-24

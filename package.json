@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "raycast-todo-buddy",
-  "title": "Raycast TODO Buddy",
+  "title": "TODO Buddy",
   "description": "A blazing fast todo list for Raycast",
   "icon": "command-icon.png",
   "author": "yuichkun",
