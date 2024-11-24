@@ -9,7 +9,6 @@ export function searchItems<T extends Task>(unfilteredItems: T[], allTags: Tag[]
     const tags = findTags(task, allTags);
 
     function getCompleted() {
-      console.log("task", task);
       if ("completed" in task) {
         return task.completed ? "Done" : "Incomplete";
       }
@@ -42,14 +41,16 @@ export function searchItems<T extends Task>(unfilteredItems: T[], allTags: Tag[]
       completed: getCompleted(),
       priority: getPriority(),
       date: getDate(),
+      level: task.difficulty,
     };
   });
   const fuse = new Fuse(searchTargets, {
-    keys: ["text", "tags.name", "completed", "date", "priority", "hasNoTag"],
+    keys: ["text", "tags.name", "completed", "date", "priority", "hasNoTag", "level"],
     useExtendedSearch: true,
     threshold: 0.2,
   });
-  const result = fuse.search(searchText);
+  const adjustedSearchText = searchText.toLowerCase() === "easy" ? "easy | Trivial" : searchText;
+  const result = fuse.search(adjustedSearchText);
   const matchingItemIds = result.map((r) => r.item.id);
   return unfilteredItems.filter((item) => matchingItemIds.includes(item.id));
 }
