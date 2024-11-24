@@ -7,6 +7,7 @@ import { nameToColor } from "./nameToColor";
 import { priorityToColor } from "./priorityToColor";
 import { findTags } from "./tag";
 import { Task, Tag } from "./types";
+import { DifficultyIconMap } from "./constants";
 
 type Props = {
   task: Task;
@@ -35,6 +36,9 @@ export const TaskLineItem: FC<Props> = ({ task, refetchList, allTags }) => {
         </ActionPanel>
       }
       accessories={[
+        {
+          icon: task.difficulty ? DifficultyIconMap[task.difficulty as keyof typeof DifficultyIconMap] : null,
+        },
         ...tags.map((tag) => ({
           tag: {
             value: tag.name,
