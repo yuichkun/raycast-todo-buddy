@@ -1,4 +1,4 @@
-import { ActionPanel, List } from "@raycast/api";
+import { ActionPanel, Color, Icon, List } from "@raycast/api";
 import { FC } from "react";
 import { TaskEditMenu } from "./actions/edit";
 import { getConfig } from "./config";
@@ -19,6 +19,14 @@ export const TaskLineItem: FC<Props> = ({ task, refetchList, allTags }) => {
   const tags = findTags(task, allTags);
   return (
     <List.Item
+      icon={
+        task.completed
+          ? {
+              source: Icon.CheckCircle,
+              tintColor: Color.Green,
+            }
+          : Icon.Circle
+      }
       key={task.id}
       title={task.text}
       actions={
