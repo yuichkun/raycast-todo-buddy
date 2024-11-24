@@ -1,28 +1,28 @@
 import { Action, ActionPanel, Form, Icon, showToast, Toast, useNavigation } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { FC } from "react";
-import { createTask, getAllTags } from "./storage";
-import { Tag, Todo } from "./types";
 import ListTasks from "./list-tasks";
+import { createTask, getAllTags } from "./storage";
+import { Tag, Task } from "./types";
 
 export default function Command() {
   const { isLoading, data } = useCachedPromise(getAllTags, [], {
     initialData: [],
   });
   const { push } = useNavigation();
-  async function handleCreate(todo: Todo) {
+  async function handleCreate(task: Task) {
     const toast = await showToast({
       style: Toast.Style.Animated,
       title: "Creating a new Task...",
-      message: todo.title,
+      message: task.text,
     });
     try {
-      const localDateString = todo.date ? new Date(todo.date).toLocaleString() : undefined;
+      const localDateString = task.date ? new Date(task.date).toLocaleString() : undefined;
       await createTask({
-        text: todo.title,
-        difficulty: todo.difficulty,
+        text: task.text,
+        difficulty: task.difficulty,
         date: localDateString,
-        tags: todo.tags,
+        tags: task.tags,
       });
       toast.style = Toast.Style.Success;
       toast.title = "Created a new Task";
@@ -46,7 +46,7 @@ export default function Command() {
 type Props = {
   isLoading: boolean;
   tags: Tag[];
-  onCreate: (todo: Todo) => void;
+  onCreate: (todo: Task) => void;
 };
 
 const CreateTodoForm: FC<Props> = ({ onCreate, tags, isLoading }) => {
@@ -59,7 +59,7 @@ const CreateTodoForm: FC<Props> = ({ onCreate, tags, isLoading }) => {
         </ActionPanel>
       }
     >
-      <Form.TextField id="title" title="Task Name" />
+      <Form.TextField id="text" title="Task Name" />
       <Form.DatePicker id="date" title="Date" />
       <Form.TagPicker id="tags" title="Tags">
         {tags.map((tag) => (

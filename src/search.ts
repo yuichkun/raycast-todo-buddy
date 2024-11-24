@@ -1,16 +1,15 @@
 import Fuse from "fuse.js";
-import { getConfig } from "./config";
 import { determinePriority, Priority } from "./date";
 import { findTags } from "./tag";
-import { Task, Tag } from "./types";
+import { Tag, Task } from "./types";
 
 export function searchItems<T extends Task>(unfilteredItems: T[], allTags: Tag[], searchText: string) {
-  const { language } = getConfig();
   type SearchTarget = Omit<T, "tags" | "date"> & { tags: Tag[]; completed?: string; date?: string; priority?: string };
   const searchTargets: SearchTarget[] = unfilteredItems.map((task) => {
     const tags = findTags(task, allTags);
 
     function getCompleted() {
+      console.log("task", task);
       if ("completed" in task) {
         return task.completed ? "Done" : "Incomplete";
       }

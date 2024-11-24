@@ -1,10 +1,3 @@
-export interface Todo {
-  title: string;
-  difficulty: string;
-  date?: Date;
-  tags: string[];
-}
-
 export interface Preferences {
   language: string;
 }
