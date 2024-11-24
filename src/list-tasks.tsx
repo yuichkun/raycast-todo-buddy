@@ -25,6 +25,9 @@ const Command = () => {
 
   const { searchText, setSearchText, filteredItems } = useSearch(unfilteredItem, allTags);
 
+  const incompleteTasks = filteredItems.filter((task) => !task.completed);
+  const completeTasks = filteredItems.filter((task) => task.completed);
+
   return (
     <List
       isLoading={isAllItemLoading || isAllTagLoading}
@@ -32,9 +35,16 @@ const Command = () => {
       searchText={searchText}
       onSearchTextChange={setSearchText}
     >
-      {filteredItems.sort(sortByDate).map((task) => (
-        <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
-      ))}
+      <List.Section title="Incomplete" subtitle={`${incompleteTasks.length} tasks`}>
+        {incompleteTasks.sort(sortByDate).map((task) => (
+          <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
+        ))}
+      </List.Section>
+      <List.Section title="Done" subtitle={`${completeTasks.length} tasks`}>
+        {completeTasks.sort(sortByDate).map((task) => (
+          <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
+        ))}
+      </List.Section>
     </List>
   );
 };
