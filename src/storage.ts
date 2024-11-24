@@ -1,5 +1,6 @@
 import {
   changeTagsOfATaskInStorage,
+  completeTaskInStorage,
   createTagInStorage,
   createTaskInStorage,
   deleteTaskInStorage,
@@ -19,7 +20,7 @@ type CreateTaskArgs = {
 };
 export function createTask({ text, difficulty, date, tags }: CreateTaskArgs) {
   console.log("createTask", text, difficulty, date, tags);
-  return createTaskInStorage({ id: uuidv4(), text, difficulty, date, tags: tags ?? [] });
+  return createTaskInStorage({ id: uuidv4(), text, difficulty, date, tags: tags ?? [], completed: false });
 }
 
 export async function retrieveAllItems(): Promise<Task[]> {
@@ -28,8 +29,8 @@ export async function retrieveAllItems(): Promise<Task[]> {
 }
 
 export async function completeTask(taskId: string) {
-  // TODO: implement
   console.log("completeTask", taskId);
+  return completeTaskInStorage(taskId);
 }
 
 export async function deleteTask(taskId: string) {

@@ -8,6 +8,7 @@ export type Task = {
   difficulty: string;
   date: string | undefined;
   tags: string[];
+  completed: boolean;
 };
 
 export type Tag = {
