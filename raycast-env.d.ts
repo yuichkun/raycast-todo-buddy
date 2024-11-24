@@ -24,6 +24,8 @@ declare namespace Preferences {
   export type CreateTag = ExtensionPreferences & {}
   /** Preferences accessible in the `list-tags` command */
   export type ListTags = ExtensionPreferences & {}
+  /** Preferences accessible in the `export-data` command */
+  export type ExportData = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
@@ -35,5 +37,7 @@ declare namespace Arguments {
   export type CreateTag = {}
   /** Arguments passed to the `list-tags` command */
   export type ListTags = {}
+  /** Arguments passed to the `export-data` command */
+  export type ExportData = {}
 }
 

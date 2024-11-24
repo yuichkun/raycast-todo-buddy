@@ -79,3 +79,7 @@ export async function changeDifficultyOfATaskInStorage(taskId: string, difficult
   const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, difficulty } : task));
   await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
 }
+
+export async function getAllData() {
+  return LocalStorage.allItems();
+}

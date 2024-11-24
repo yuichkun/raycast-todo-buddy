@@ -33,6 +33,12 @@
       "title": "List Tags",
       "description": "List existing tags",
       "mode": "view"
+    },
+    {
+      "name": "export-data",
+      "title": "Export Data",
+      "description": "exports all data",
+      "mode": "no-view"
     }
   ],
   "preferences": [
