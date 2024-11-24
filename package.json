@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "habitica",
-  "title": "Habitica",
-  "description": "Manages Tasks on Habitica",
+  "name": "raycast-todo-buddy",
+  "title": "Raycast TODO Buddy",
+  "description": "A blazing fast todo list for Raycast",
   "icon": "command-icon.png",
   "author": "yuichkun",
   "categories": [
@@ -13,13 +13,13 @@
     {
       "name": "create-task",
       "title": "Create Task",
-      "description": "creates a new task on Habitica",
+      "description": "creates a new task",
       "mode": "view"
     },
     {
       "name": "list-tasks",
       "title": "List Tasks",
-      "description": "lists tasks registered on Habitica",
+      "description": "lists existing tasks",
       "mode": "view"
     }
   ],

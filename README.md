@@ -1,3 +1,3 @@
-# Habitica
+# Raycast TODO Buddy
 
-Manages Tasks on Habitica
+A blazing fast todo list for Raycast
