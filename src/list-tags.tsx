@@ -1,5 +1,7 @@
-import { List } from "@raycast/api";
+import { Grid } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
+
+import { nameToColor } from "./nameToColor";
 import { getAllTags } from "./storage";
 
 export default function Command() {
@@ -7,10 +9,19 @@ export default function Command() {
     initialData: [],
   });
   return (
-    <List>
+    <Grid>
       {tags.map((tag) => (
-        <List.Item key={tag.id} title={tag.name} />
+        <Grid.Item
+          key={tag.id}
+          content={{
+            value: {
+              color: nameToColor(tag.name),
+            },
+            tooltip: tag.name,
+          }}
+          title={tag.name}
+        />
       ))}
-    </List>
+    </Grid>
   );
 }
