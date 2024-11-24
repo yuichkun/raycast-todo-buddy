@@ -10,6 +10,7 @@ import {
   updateDueDateInStorage,
   changeDifficultyOfATaskInStorage,
   updateTaskInStorage,
+  deleteTagInStorage,
 } from "./repository/localStorage";
 import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
@@ -68,6 +69,11 @@ export async function createTag(tag: Tag) {
 export async function updateTags(taskId: string, tags: string[]) {
   console.log("updateTags", taskId, tags);
   return changeTagsOfATaskInStorage(taskId, tags);
+}
+
+export async function deleteTag(tagId: string) {
+  console.log("deleteTag", tagId);
+  return deleteTagInStorage(tagId);
 }
 
 export async function updateLevel(taskId: string, level: string) {

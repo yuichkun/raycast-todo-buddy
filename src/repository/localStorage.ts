@@ -62,6 +62,12 @@ export async function changeTagsOfATaskInStorage(taskId: string, tagIds: string[
   await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
 }
 
+export async function deleteTagInStorage(tagId: string) {
+  const tags = await getAllTagsInStorage();
+  const filteredTags = tags.filter((tag) => tag.id !== tagId);
+  await LocalStorage.setItem("tags", JSON.stringify(filteredTags));
+}
+
 export async function changeDifficultyOfATaskInStorage(taskId: string, difficulty: string) {
   const tasks = await getAllTasks();
   const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, difficulty } : task));

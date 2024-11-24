@@ -1,13 +1,33 @@
-import { Grid } from "@raycast/api";
+import { Action, ActionPanel, Grid, Icon, showToast, Toast } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 
 import { nameToColor } from "./nameToColor";
-import { getAllTags } from "./storage";
+import { deleteTag, getAllTags } from "./storage";
+import { Tag } from "./types";
 
 export default function Command() {
-  const { data: tags } = useCachedPromise(getAllTags, [], {
+  const { data: tags, revalidate } = useCachedPromise(getAllTags, [], {
     initialData: [],
   });
+  const handleDelete = async (tag: Tag) => {
+    const toast = await showToast({
+      style: Toast.Style.Animated,
+      title: "Deleting Tag...",
+      message: tag.name,
+    });
+    try {
+      await deleteTag(tag.id);
+      toast.style = Toast.Style.Success;
+      toast.title = "Deleted Tag";
+      revalidate();
+    } catch (e) {
+      toast.style = Toast.Style.Failure;
+      toast.title = "Failed:";
+      if (e instanceof Error) {
+        toast.message = e.message;
+      }
+    }
+  };
   return (
     <Grid>
       {tags.map((tag) => (
@@ -20,6 +40,20 @@ export default function Command() {
             tooltip: tag.name,
           }}
           title={tag.name}
+          actions={
+            <ActionPanel>
+              <Action
+                title="Delete Tag"
+                icon={Icon.DeleteDocument}
+                style={Action.Style.Destructive}
+                shortcut={{
+                  key: "delete",
+                  modifiers: ["cmd", "shift"],
+                }}
+                onAction={() => handleDelete(tag)}
+              />
+            </ActionPanel>
+          }
         />
       ))}
     </Grid>
