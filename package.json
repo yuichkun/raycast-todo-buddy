@@ -48,20 +48,20 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.48.9",
-    "@raycast/utils": "1.5.2",
-    "axios": "1.3.4",
-    "fuse.js": "6.6.2",
-    "moment": "2.29.4"
+    "@raycast/api": "^1.86.0",
+    "@raycast/utils": "1.18.1",
+    "axios": "1.7.7",
+    "fuse.js": "7.0.0",
+    "moment": "2.30.1"
   },
   "devDependencies": {
-    "@raycast/eslint-config": "1.0.5",
-    "@types/node": "18.8.3",
-    "@types/react": "18.0.9",
-    "eslint": "^7.32.0",
-    "prettier": "^2.5.1",
-    "typescript": "^4.4.3",
-    "vitest": "0.29.7"
+    "@raycast/eslint-config": "1.0.11",
+    "@types/node": "22.9.3",
+    "@types/react": "18.3.12",
+    "eslint": "^9.15.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.7.2",
+    "vitest": "2.1.5"
   },
   "scripts": {
     "build": "ray build -e dist",
