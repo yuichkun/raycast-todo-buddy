@@ -1,4 +1,10 @@
-import { createTaskInStorage, deleteTaskInStorage, getAllTasks, renameTaskInStorage } from "./repository/localStorage";
+import {
+  createTaskInStorage,
+  deleteTaskInStorage,
+  getAllTasks,
+  renameTaskInStorage,
+  updateDueDateInStorage,
+} from "./repository/localStorage";
 import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
 
@@ -33,9 +39,9 @@ export async function renameTask(taskId: string, text: string) {
   return renameTaskInStorage(taskId, text);
 }
 
-export async function updateDueDate(taskId: string, date: Date | null) {
-  // TODO: implement
+export async function updateDueDate(taskId: string, date: Date | undefined) {
   console.log("updateDueDate", taskId, date);
+  return updateDueDateInStorage(taskId, date?.toISOString());
 }
 
 export async function getAllTags(): Promise<Tag[]> {

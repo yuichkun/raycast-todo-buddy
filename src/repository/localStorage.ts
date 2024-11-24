@@ -25,3 +25,9 @@ export async function renameTaskInStorage(taskId: string, text: string) {
   const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, text } : task));
   await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
 }
+
+export async function updateDueDateInStorage(taskId: string, date: string | undefined) {
+  const tasks = await getAllTasks();
+  const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, date } : task));
+  await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
+}
