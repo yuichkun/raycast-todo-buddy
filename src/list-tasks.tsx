@@ -7,7 +7,10 @@ import { getAllTags, retrieveAllItems } from "./storage";
 import { TaskLineItem } from "./TaskLineItem";
 import { Tag, Task } from "./types";
 type SortOrder = "dueDate" | "level";
-const Command = () => {
+type Props = {
+  initialSearchText?: string;
+};
+const Command = ({ initialSearchText }: Props) => {
   const initialData = useMemo(() => {
     return [] as Task[];
   }, []);
@@ -23,7 +26,7 @@ const Command = () => {
     initialData: [] as Tag[],
   });
 
-  const { searchText, setSearchText, filteredItems } = useSearch(unfilteredItem, allTags);
+  const { searchText, setSearchText, filteredItems } = useSearch(unfilteredItem, allTags, initialSearchText);
 
   const incompleteTasks = filteredItems.filter((task) => !task.completed);
   const completeTasks = filteredItems.filter((task) => task.completed);

@@ -33,7 +33,7 @@ export function MultipleEdit({ oldTask, refetchList }: MultipleEditProps) {
       toast.style = Toast.Style.Success;
       toast.title = "Updated a Task";
       refetchList();
-      push(<ListTasks />);
+      push(<ListTasks initialSearchText={""} />);
     } catch (e) {
       toast.style = Toast.Style.Failure;
       toast.title = "Failed to update a Task";

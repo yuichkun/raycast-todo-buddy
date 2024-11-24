@@ -26,7 +26,8 @@ export default function Command() {
       });
       toast.style = Toast.Style.Success;
       toast.title = "Created a new Task";
-      push(<ListTasks />);
+      const taskNames = data.filter((tag) => task.tags.includes(tag.id)).map((tag) => tag.name);
+      push(<ListTasks initialSearchText={taskNames.join(" | ")} />);
     } catch (e) {
       toast.style = Toast.Style.Failure;
       toast.title = "Failed to create a new Task";

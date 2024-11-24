@@ -5,6 +5,7 @@ import { nameToColor } from "./nameToColor";
 import { deleteTag, getAllTags } from "./storage";
 import { Tag } from "./types";
 import { RenameTag } from "./RenameTag";
+import ListTasks from "./list-tasks";
 
 export default function Command() {
   const { data: tags, revalidate } = useCachedPromise(getAllTags, [], {
@@ -52,6 +53,15 @@ export default function Command() {
                     modifiers: ["cmd", "shift"],
                   }}
                   target={<RenameTag tag={tag} revalidate={revalidate} />}
+                />
+                <Action.Push
+                  title="Show Tasks"
+                  icon={Icon.List}
+                  shortcut={{
+                    key: "s",
+                    modifiers: ["cmd", "shift"],
+                  }}
+                  target={<ListTasks initialSearchText={tag.name} />}
                 />
                 <Action
                   title="Delete Tag"
