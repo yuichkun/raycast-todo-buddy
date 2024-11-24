@@ -14,9 +14,9 @@ export async function createTaskInStorage(task: Task) {
   await LocalStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-export async function completeTaskInStorage(taskId: string) {
+export async function toggleTaskCompletionInStorage(taskId: string) {
   const tasks = await getAllTasks();
-  const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, completed: true } : task));
+  const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, completed: !task.completed } : task));
   await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
 }
 

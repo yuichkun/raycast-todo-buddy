@@ -1,7 +1,7 @@
-import { Action, ActionPanel, Icon, showToast } from "@raycast/api";
+import { Action, ActionPanel, Icon, showToast, Toast } from "@raycast/api";
 import { FC } from "react";
 import { getConfig } from "../config";
-import { completeTask, deleteTask, updateDueDate } from "../storage";
+import { toggleTaskCompletionStatus, deleteTask, updateDueDate } from "../storage";
 import { playSound } from "../sound";
 import { Task } from "../types";
 import { ChangeTags } from "./ChangeTags";
@@ -14,14 +14,26 @@ type Props = {
 export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
   const { language } = getConfig();
   const handleComplete = async (task: Task) => {
+    const toast = await showToast({
+      style: Toast.Style.Animated,
+      title: "Completing Task...",
+      message: task.text,
+    });
     try {
-      await showToast({ title: "Completing Task...", message: task.text });
-      await completeTask(task.id);
-      refetchList();
-      playSound("todo.mp3");
+      await toggleTaskCompletionStatus(task.id);
+      toast.style = Toast.Style.Success;
+      if (task.completed) {
+        toast.title = "Marked Task as Incomplete";
+        refetchList();
+      } else {
+        toast.title = "Marked Task as Complete";
+        refetchList();
+        await playSound("todo.mp3");
+      }
     } catch (e) {
+      toast.title = "Failed:";
       if (e instanceof Error) {
-        await showToast({ title: "Failed:", message: e.message });
+        toast.message = e.message;
       }
       throw e;
     }
@@ -59,8 +71,8 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
   return (
     <ActionPanel.Submenu title="Edit">
       <Action
-        title="Mark as Complete"
-        icon={Icon.CheckCircle}
+        title={item.completed ? "Mark as Incomplete" : "Mark as Complete"}
+        icon={item.completed ? Icon.Circle : Icon.CheckCircle}
         shortcut={{
           key: "c",
           modifiers: ["cmd", "shift"],

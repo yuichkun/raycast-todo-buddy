@@ -1,6 +1,6 @@
 import {
   changeTagsOfATaskInStorage,
-  completeTaskInStorage,
+  toggleTaskCompletionInStorage,
   createTagInStorage,
   createTaskInStorage,
   deleteTaskInStorage,
@@ -28,9 +28,9 @@ export async function retrieveAllItems(): Promise<Task[]> {
   return getAllTasks();
 }
 
-export async function completeTask(taskId: string) {
-  console.log("completeTask", taskId);
-  return completeTaskInStorage(taskId);
+export async function toggleTaskCompletionStatus(taskId: string) {
+  console.log("toggleTaskCompletionStatus", taskId);
+  return toggleTaskCompletionInStorage(taskId);
 }
 
 export async function deleteTask(taskId: string) {
