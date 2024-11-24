@@ -43,3 +43,9 @@ export async function createTagInStorage(tag: Tag) {
   tags.push(tag);
   await LocalStorage.setItem("tags", JSON.stringify(tags));
 }
+
+export async function changeTagsOfATaskInStorage(taskId: string, tagIds: string[]) {
+  const tasks = await getAllTasks();
+  const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, tags: tagIds } : task));
+  await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
+}

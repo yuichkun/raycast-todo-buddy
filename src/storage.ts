@@ -1,4 +1,5 @@
 import {
+  changeTagsOfATaskInStorage,
   createTagInStorage,
   createTaskInStorage,
   deleteTaskInStorage,
@@ -57,6 +58,6 @@ export async function createTag(tag: Tag) {
 }
 
 export async function updateTags(taskId: string, tags: string[]) {
-  // TODO: implement
   console.log("updateTags", taskId, tags);
+  return changeTagsOfATaskInStorage(taskId, tags);
 }
