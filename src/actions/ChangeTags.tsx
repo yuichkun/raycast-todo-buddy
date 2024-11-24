@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Form, showToast, useNavigation } from "@raycast/api";
+import { Action, ActionPanel, Form, showToast, Toast, useNavigation } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { FC } from "react";
 import { getAllTags, updateTags } from "../storage";
@@ -15,19 +15,23 @@ export const ChangeTags: FC<ChangeTagsProps> = ({ item: item, refetchList }) => 
   });
 
   const handleSubmit = async ({ tags }: { tags: string[] }) => {
+    const toast = await showToast({
+      style: Toast.Style.Animated,
+      title: "Updating tags of task",
+      message: item.text,
+    });
     try {
-      await showToast({
-        title: "Updating tags of task",
-        message: item.text,
-      });
       await updateTags(item.id, tags);
+      toast.style = Toast.Style.Success;
+      toast.title = "Updated tags of task";
       refetchList();
       pop();
     } catch (e) {
+      toast.style = Toast.Style.Failure;
+      toast.title = "Failed to update tags of task";
       if (e instanceof Error) {
-        await showToast({ title: "Failed:", message: e.message });
+        toast.message = e.message;
       }
-      throw e;
     }
   };
 
