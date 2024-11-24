@@ -26,7 +26,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
       throw e;
     }
   };
-  const handleUpdateDate = async (task: Task, date: Date | null) => {
+  const handleUpdateDate = async (task: Task, date: Date | undefined) => {
     try {
       await showToast({
         title: "Updating Task Due Date",
@@ -74,7 +74,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
           modifiers: ["cmd", "shift"],
         }}
         onChange={(date) => {
-          handleUpdateDate(item, date);
+          handleUpdateDate(item, date ?? undefined);
         }}
       />
       <Action.Push
