@@ -14,7 +14,6 @@ export default function Command() {
       await createTask({
         text: todo.title,
         difficulty: todo.difficulty,
-        type: todo.type,
         date: todo.date?.toISOString(),
         tags: todo.tags,
       });

@@ -1,12 +1,9 @@
 export interface Todo {
   title: string;
   difficulty: string;
-  type: HabiticaTaskTypes;
   date?: Date;
   tags: string[];
 }
-
-export type HabiticaTaskTypes = "habit" | "daily" | "todo" | "reward";
 
 export enum HabiticaTaskDifficulty {
   Trivial = 0.1,
