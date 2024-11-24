@@ -17,10 +17,11 @@ export default function Command() {
       message: todo.title,
     });
     try {
+      const localDateString = todo.date ? new Date(todo.date).toLocaleString() : undefined;
       await createTask({
         text: todo.title,
         difficulty: todo.difficulty,
-        date: todo.date?.toISOString(),
+        date: localDateString,
         tags: todo.tags,
       });
       toast.style = Toast.Style.Success;

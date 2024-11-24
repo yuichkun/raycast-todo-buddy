@@ -44,7 +44,7 @@ export async function renameTask(taskId: string, text: string) {
 
 export async function updateDueDate(taskId: string, date: Date | undefined) {
   console.log("updateDueDate", taskId, date);
-  return updateDueDateInStorage(taskId, date?.toISOString());
+  return updateDueDateInStorage(taskId, date?.toLocaleString());
 }
 
 export async function getAllTags(): Promise<Tag[]> {

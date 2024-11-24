@@ -32,7 +32,7 @@ export function searchItems<T extends Task>(unfilteredItems: T[], allTags: Tag[]
     }
     function getDate() {
       if ("date" in task && task.date) {
-        return new Date(task.date).toLocaleDateString(language);
+        return new Date(task.date).toLocaleDateString();
       }
     }
 
