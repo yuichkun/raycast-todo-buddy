@@ -1,3 +1,3 @@
-# TODO Buddy Changelog
+# Todo Buddy Changelog
 
 ## [Initial Version] - 2024-11-24

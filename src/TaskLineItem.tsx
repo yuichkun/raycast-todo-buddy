@@ -39,7 +39,7 @@ export const TaskLineItem: FC<Props> = ({ task, refetchList, allTags }) => {
       key={task.id}
       title={task.text}
       actions={
-        <ActionPanel title="TODO Buddy">
+        <ActionPanel title="Todo Buddy">
           <TaskEditMenu item={task} refetchList={refetchList} />
         </ActionPanel>
       }
