@@ -1,4 +1,4 @@
-import { HabiticaItems, Tag } from "./types";
+import { Tag, Task } from "./types";
 
 type CreateTaskArgs = {
   text: string;
@@ -11,12 +11,10 @@ export function createTask({ text, difficulty, date, tags }: CreateTaskArgs) {
   console.log("createTask", text, difficulty, date, tags);
 }
 
-export async function retrieveAllItems(): Promise<HabiticaItems> {
+export async function retrieveAllItems(): Promise<Task[]> {
   // TODO: implement
   console.log("retrieveAllItems");
-  return {
-    tasks: [],
-  };
+  return [];
 }
 
 export async function completeTask(taskId: string) {

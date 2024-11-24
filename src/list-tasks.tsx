@@ -2,16 +2,14 @@ import { List } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { useMemo } from "react";
 import { sortByDate } from "./date";
-import { getAllTags, retrieveAllItems } from "./storage";
 import { useSearch } from "./hooks/useSearch";
+import { getAllTags, retrieveAllItems } from "./storage";
 import { TaskLineItem } from "./TaskLineItem";
-import { HabiticaItems, Tag } from "./types";
+import { Tag, Task } from "./types";
 
 const Command = () => {
   const initialData = useMemo(() => {
-    return {
-      tasks: [],
-    } as HabiticaItems;
+    return [] as Task[];
   }, []);
 
   const {
@@ -34,7 +32,7 @@ const Command = () => {
       searchText={searchText}
       onSearchTextChange={setSearchText}
     >
-      {filteredItems.tasks.sort(sortByDate).map((task) => (
+      {filteredItems.sort(sortByDate).map((task) => (
         <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
       ))}
     </List>

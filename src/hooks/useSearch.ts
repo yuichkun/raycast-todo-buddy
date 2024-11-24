@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import { searchItems } from "../search";
-import { HabiticaItems, Tag } from "../types";
+import { Tag, Task } from "../types";
 
-export function useSearch(unfilteredItems: HabiticaItems, allTags: Tag[]) {
+export function useSearch(unfilteredItems: Task[], allTags: Tag[]) {
   const [searchText, setSearchText] = useState("today");
-  const [filteredItems, setFilteredItems] = useState<HabiticaItems>(unfilteredItems);
+  const [filteredItems, setFilteredItems] = useState<Task[]>(unfilteredItems);
   useEffect(() => {
     if (searchText === "") {
       setFilteredItems(unfilteredItems);
       return;
     }
-    const tasks = searchItems(unfilteredItems.tasks, allTags, searchText);
-    setFilteredItems({
-      tasks,
-    });
+    const tasks = searchItems(unfilteredItems, allTags, searchText);
+    setFilteredItems(tasks);
   }, [searchText, unfilteredItems]);
   return {
     searchText,
