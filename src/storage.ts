@@ -78,6 +78,13 @@ export async function updateTags(taskId: string, tags: string[]) {
 }
 
 export async function deleteTag(tagId: string) {
+  // If the tag is used by any task, don't delete it
+  const tasks = await getAllTasks();
+  const isUsed = tasks.some((task) => task.tags.includes(tagId));
+  if (isUsed) {
+    const tagName = (await getAllTags()).find((tag) => tag.id === tagId)?.name;
+    throw new Error(`Tag ${tagName} is used by one or more tasks`);
+  }
   console.log("deleteTag", tagId);
   return deleteTagInStorage(tagId);
 }
