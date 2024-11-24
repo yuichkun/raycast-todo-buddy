@@ -1,6 +1,6 @@
 import { Action, ActionPanel, Form, showToast, useNavigation } from "@raycast/api";
 import { FC } from "react";
-import { renameTask } from "../habitica";
+import { renameTask } from "../storage";
 import { HabiticaTask } from "../types";
 
 type RenameTaskProps = {

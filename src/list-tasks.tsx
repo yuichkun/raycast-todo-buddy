@@ -2,7 +2,7 @@ import { List } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { useMemo } from "react";
 import { sortByDate } from "./date";
-import { getAllTags, retrieveAllItems } from "./habitica";
+import { getAllTags, retrieveAllItems } from "./storage";
 import { useSearch } from "./hooks/useSearch";
 import { TaskLineItem } from "./TaskLineItem";
 import { HabiticaItems, Tag } from "./types";

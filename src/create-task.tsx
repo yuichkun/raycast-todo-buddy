@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Form, Icon, showHUD, showToast } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { FC } from "react";
-import { createTask, getAllTags } from "./habitica";
+import { createTask, getAllTags } from "./storage";
 import { Tag, Todo } from "./types";
 
 export default function Command() {

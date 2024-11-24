@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Form, showToast, useNavigation } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { FC } from "react";
-import { getAllTags, updateTags } from "../habitica";
+import { getAllTags, updateTags } from "../storage";
 import { HabiticaTask } from "../types";
 
 type ChangeTagsProps = {

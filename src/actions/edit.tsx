@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Icon, showToast } from "@raycast/api";
 import { FC } from "react";
 import { getConfig } from "../config";
-import { completeTask, deleteTask, updateDueDate } from "../habitica";
+import { completeTask, deleteTask, updateDueDate } from "../storage";
 import { playSound } from "../sound";
 import { HabiticaTask } from "../types";
 import { ChangeTags } from "./ChangeTags";
