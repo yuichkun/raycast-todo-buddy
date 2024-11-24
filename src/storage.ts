@@ -9,6 +9,7 @@ import {
   renameTaskInStorage,
   updateDueDateInStorage,
   changeDifficultyOfATaskInStorage,
+  updateTaskInStorage,
 } from "./repository/localStorage";
 import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
@@ -22,6 +23,11 @@ type CreateTaskArgs = {
 export function createTask({ text, difficulty, date, tags }: CreateTaskArgs) {
   console.log("createTask", text, difficulty, date, tags);
   return createTaskInStorage({ id: uuidv4(), text, difficulty, date, tags: tags ?? [], completed: false });
+}
+
+export async function updateTask(taskId: string, newTask: Omit<Task, "id">) {
+  console.log("updateTask", taskId, newTask);
+  return updateTaskInStorage(taskId, newTask);
 }
 
 export async function retrieveAllItems(): Promise<Task[]> {

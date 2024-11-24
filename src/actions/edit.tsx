@@ -7,6 +7,7 @@ import { Task } from "../types";
 import { ChangeTags } from "./ChangeTags";
 import { ChangeLevel } from "./ChangeLevel";
 import { RenameTask } from "./RenameTask";
+import { MultipleEdit } from "./MultipleEdit";
 type Props = {
   item: Task;
   refetchList: () => void;
@@ -71,6 +72,15 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
   };
   return (
     <ActionPanel.Submenu title="Edit">
+      <Action.Push
+        title="Edit Task"
+        icon={Icon.Document}
+        shortcut={{
+          key: "e",
+          modifiers: ["cmd", "shift"],
+        }}
+        target={<MultipleEdit oldTask={item} refetchList={refetchList} />}
+      />
       <Action
         title={item.completed ? "Mark as Incomplete" : "Mark as Complete"}
         icon={item.completed ? Icon.Circle : Icon.CheckCircle}
@@ -120,6 +130,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
       <Action
         title="Delete Task"
         icon={Icon.DeleteDocument}
+        style={Action.Style.Destructive}
         shortcut={{
           key: "delete",
           modifiers: ["cmd", "shift"],
