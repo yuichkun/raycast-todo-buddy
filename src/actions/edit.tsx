@@ -56,16 +56,21 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
     }
   };
   const handleDelete = async (task: Task) => {
+    const toast = await showToast({
+      style: Toast.Style.Animated,
+      title: "Deleting the task",
+      message: task.text,
+    });
     try {
-      await showToast({
-        title: "Deleting the task",
-        message: task.text,
-      });
+      toast.style = Toast.Style.Success;
+      toast.title = "Deleted the task";
       await deleteTask(task.id);
       refetchList();
     } catch (e) {
+      toast.style = Toast.Style.Failure;
+      toast.title = "Failed:";
       if (e instanceof Error) {
-        await showToast({ title: "Failed:", message: e.message });
+        toast.message = e.message;
       }
       throw e;
     }
