@@ -1,4 +1,4 @@
-import { createTaskInStorage, getAllTasks } from "./repository/localStorage";
+import { createTaskInStorage, deleteTaskInStorage, getAllTasks } from "./repository/localStorage";
 import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
 
@@ -24,8 +24,8 @@ export async function completeTask(taskId: string) {
 }
 
 export async function deleteTask(taskId: string) {
-  // TODO: implement
   console.log("deleteTask", taskId);
+  return deleteTaskInStorage(taskId);
 }
 
 export async function renameTask(taskId: string, text: string) {
