@@ -1,6 +1,8 @@
 import {
+  createTagInStorage,
   createTaskInStorage,
   deleteTaskInStorage,
+  getAllTagsInStorage,
   getAllTasks,
   renameTaskInStorage,
   updateDueDateInStorage,
@@ -45,9 +47,8 @@ export async function updateDueDate(taskId: string, date: Date | undefined) {
 }
 
 export async function getAllTags(): Promise<Tag[]> {
-  // TODO: implement
   console.log("getAllTags");
-  return [];
+  return getAllTagsInStorage();
 }
 
 export async function updateTags(taskId: string, tags: string[]) {

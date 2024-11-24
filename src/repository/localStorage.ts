@@ -1,5 +1,5 @@
 import { LocalStorage } from "@raycast/api";
-import { Task } from "../types";
+import { Tag, Task } from "../types";
 
 export async function getAllTasks(): Promise<Task[]> {
   const rawTasks = await LocalStorage.getItem<string>("tasks");
@@ -30,4 +30,10 @@ export async function updateDueDateInStorage(taskId: string, date: string | unde
   const tasks = await getAllTasks();
   const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, date } : task));
   await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
+}
+
+export async function getAllTagsInStorage(): Promise<Tag[]> {
+  const rawTags = await LocalStorage.getItem<string>("tags");
+  const tags = JSON.parse(rawTags ?? "[]");
+  return tags;
 }
