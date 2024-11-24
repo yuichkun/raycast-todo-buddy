@@ -42,16 +42,18 @@ export default function Command() {
           title={tag.name}
           actions={
             <ActionPanel>
-              <Action
-                title="Delete Tag"
-                icon={Icon.DeleteDocument}
-                style={Action.Style.Destructive}
-                shortcut={{
-                  key: "delete",
-                  modifiers: ["cmd", "shift"],
-                }}
-                onAction={() => handleDelete(tag)}
-              />
+              <ActionPanel.Submenu title="Edit">
+                <Action
+                  title="Delete Tag"
+                  icon={Icon.DeleteDocument}
+                  style={Action.Style.Destructive}
+                  shortcut={{
+                    key: "delete",
+                    modifiers: ["cmd", "shift"],
+                  }}
+                  onAction={() => handleDelete(tag)}
+                />
+              </ActionPanel.Submenu>
             </ActionPanel>
           }
         />
