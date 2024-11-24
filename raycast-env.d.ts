@@ -26,6 +26,8 @@ declare namespace Preferences {
   export type ListTags = ExtensionPreferences & {}
   /** Preferences accessible in the `export-data` command */
   export type ExportData = ExtensionPreferences & {}
+  /** Preferences accessible in the `import-data` command */
+  export type ImportData = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
@@ -39,5 +41,7 @@ declare namespace Arguments {
   export type ListTags = {}
   /** Arguments passed to the `export-data` command */
   export type ExportData = {}
+  /** Arguments passed to the `import-data` command */
+  export type ImportData = {}
 }
 

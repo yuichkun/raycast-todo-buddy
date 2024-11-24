@@ -39,6 +39,12 @@
       "title": "Export Data",
       "description": "exports all data",
       "mode": "no-view"
+    },
+    {
+      "name": "import-data",
+      "title": "Import Data",
+      "description": "imports storage data from a json file",
+      "mode": "view"
     }
   ],
   "preferences": [

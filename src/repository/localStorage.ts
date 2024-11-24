@@ -83,3 +83,21 @@ export async function changeDifficultyOfATaskInStorage(taskId: string, difficult
 export async function getAllData() {
   return LocalStorage.allItems();
 }
+
+export async function importDataFromJson(jsonStr: string) {
+  const data = JSON.parse(jsonStr);
+  if (data.tasks) {
+    const tasks = JSON.parse(data.tasks);
+    if (typeof tasks !== "object") {
+      throw new Error("tasks is not an object");
+    }
+    await LocalStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+  if (data.tags) {
+    const tags = JSON.parse(data.tags);
+    if (typeof tags !== "object") {
+      throw new Error("tags is not an object");
+    }
+    await LocalStorage.setItem("tags", JSON.stringify(tags));
+  }
+}
