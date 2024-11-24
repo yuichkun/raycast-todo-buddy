@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Form, showToast, useNavigation } from "@raycast/api";
+import { Action, ActionPanel, Form, showToast, Toast, useNavigation } from "@raycast/api";
 import { FC } from "react";
 import { renameTask } from "../storage";
 import { Task } from "../types";
@@ -11,17 +11,22 @@ export const RenameTask: FC<RenameTaskProps> = ({ item: item, refetchList }) => 
   const { pop } = useNavigation();
 
   const handleSubmit = async ({ newName }: { newName: string }) => {
+    const toast = await showToast({
+      style: Toast.Style.Animated,
+      title: "Renaming a task",
+      message: newName,
+    });
     try {
-      await showToast({
-        title: "Renaming a task",
-        message: newName,
-      });
       await renameTask(item.id, newName);
+      toast.style = Toast.Style.Success;
+      toast.title = "Renamed a task";
       refetchList();
       pop();
     } catch (e) {
+      toast.style = Toast.Style.Failure;
+      toast.title = "Failed to rename a task";
       if (e instanceof Error) {
-        await showToast({ title: "Failed:", message: e.message });
+        toast.message = e.message;
       }
       throw e;
     }
