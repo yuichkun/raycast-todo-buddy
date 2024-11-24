@@ -21,7 +21,6 @@ export type Task = {
   text: string;
   date: string | null;
   tags: string[];
-  type: "todo";
 };
 
 // remove this type and just use tasks
