@@ -1,6 +1,6 @@
 import { ActionPanel, List } from "@raycast/api";
 import { FC } from "react";
-import { HabiticaEditMenu } from "./actions/edit";
+import { TaskEditMenu } from "./actions/edit";
 import { getConfig } from "./config";
 import { determinePriority } from "./date";
 import { nameToColor } from "./nameToColor";
@@ -22,8 +22,8 @@ export const TaskLineItem: FC<Props> = ({ task, refetchList, allTags }) => {
       key={task.id}
       title={task.text}
       actions={
-        <ActionPanel title="Habitica">
-          <HabiticaEditMenu item={task} refetchList={refetchList} />
+        <ActionPanel title="TODO Buddy">
+          <TaskEditMenu item={task} refetchList={refetchList} />
         </ActionPanel>
       }
       accessories={[

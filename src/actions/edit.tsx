@@ -11,7 +11,7 @@ type Props = {
   refetchList: () => void;
 };
 
-export const HabiticaEditMenu: FC<Props> = ({ item, refetchList }) => {
+export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
   const { language } = getConfig();
   const handleComplete = async (task: Task) => {
     try {
