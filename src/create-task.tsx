@@ -1,28 +1,37 @@
-import { Action, ActionPanel, Form, Icon, showHUD, showToast } from "@raycast/api";
+import { Action, ActionPanel, Form, Icon, showToast, Toast, useNavigation } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { FC } from "react";
 import { createTask, getAllTags } from "./storage";
 import { Tag, Todo } from "./types";
+import ListTasks from "./list-tasks";
 
 export default function Command() {
   const { isLoading, data } = useCachedPromise(getAllTags, [], {
     initialData: [],
   });
+  const { push } = useNavigation();
   async function handleCreate(todo: Todo) {
+    const toast = await showToast({
+      style: Toast.Style.Animated,
+      title: "Creating a new Task...",
+      message: todo.title,
+    });
     try {
-      await showToast({ title: "Creating a new Task...", message: todo.title });
       await createTask({
         text: todo.title,
         difficulty: todo.difficulty,
         date: todo.date?.toISOString(),
         tags: todo.tags,
       });
-      await showHUD(`Created a task: ${todo.title} ✅`);
+      toast.style = Toast.Style.Success;
+      toast.title = "Created a new Task";
+      push(<ListTasks />);
     } catch (e) {
+      toast.style = Toast.Style.Failure;
+      toast.title = "Failed to create a new Task";
       if (e instanceof Error) {
-        await showToast({ title: "Failed:", message: e.message });
+        toast.message = e.message;
       }
-      throw e;
     }
   }
 
