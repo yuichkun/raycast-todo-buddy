@@ -37,3 +37,9 @@ export async function getAllTagsInStorage(): Promise<Tag[]> {
   const tags = JSON.parse(rawTags ?? "[]");
   return tags;
 }
+
+export async function createTagInStorage(tag: Tag) {
+  const tags = await getAllTagsInStorage();
+  tags.push(tag);
+  await LocalStorage.setItem("tags", JSON.stringify(tags));
+}

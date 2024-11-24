@@ -51,6 +51,11 @@ export async function getAllTags(): Promise<Tag[]> {
   return getAllTagsInStorage();
 }
 
+export async function createTag(tag: Tag) {
+  console.log("createTag", tag);
+  return createTagInStorage(tag);
+}
+
 export async function updateTags(taskId: string, tags: string[]) {
   // TODO: implement
   console.log("updateTags", taskId, tags);
