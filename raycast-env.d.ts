@@ -20,6 +20,10 @@ declare namespace Preferences {
   export type CreateTask = ExtensionPreferences & {}
   /** Preferences accessible in the `list-tasks` command */
   export type ListTasks = ExtensionPreferences & {}
+  /** Preferences accessible in the `create-tag` command */
+  export type CreateTag = ExtensionPreferences & {}
+  /** Preferences accessible in the `list-tags` command */
+  export type ListTags = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
@@ -27,5 +31,9 @@ declare namespace Arguments {
   export type CreateTask = {}
   /** Arguments passed to the `list-tasks` command */
   export type ListTasks = {}
+  /** Arguments passed to the `create-tag` command */
+  export type CreateTag = {}
+  /** Arguments passed to the `list-tags` command */
+  export type ListTags = {}
 }
 

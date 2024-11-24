@@ -21,6 +21,18 @@
       "title": "List Tasks",
       "description": "lists existing tasks",
       "mode": "view"
+    },
+    {
+      "name": "create-tag",
+      "title": "Create Tag",
+      "description": "creates a new tag",
+      "mode": "view"
+    },
+    {
+      "name": "list-tags",
+      "title": "List Tags",
+      "description": "List existing tags",
+      "mode": "view"
     }
   ],
   "preferences": [
