@@ -8,6 +8,7 @@ import {
   getAllTasks,
   renameTaskInStorage,
   updateDueDateInStorage,
+  changeDifficultyOfATaskInStorage,
 } from "./repository/localStorage";
 import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
@@ -61,4 +62,9 @@ export async function createTag(tag: Tag) {
 export async function updateTags(taskId: string, tags: string[]) {
   console.log("updateTags", taskId, tags);
   return changeTagsOfATaskInStorage(taskId, tags);
+}
+
+export async function updateLevel(taskId: string, level: string) {
+  console.log("updateLevel", taskId, level);
+  return changeDifficultyOfATaskInStorage(taskId, level);
 }

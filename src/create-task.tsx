@@ -66,7 +66,7 @@ const CreateTodoForm: FC<Props> = ({ onCreate, tags, isLoading }) => {
           <Form.TagPicker.Item key={tag.id} value={tag.id} title={tag.name} />
         ))}
       </Form.TagPicker>
-      <Form.Dropdown id="difficulty" title="Difficulty" defaultValue="Trivial">
+      <Form.Dropdown id="difficulty" title="Level" defaultValue="Trivial">
         <Form.Dropdown.Item value="Trivial" title="Trivial" icon={DifficultyIconMap.Trivial} />
         <Form.Dropdown.Item value="Medium" title="Medium" icon={DifficultyIconMap.Medium} />
         <Form.Dropdown.Item value="Hard" title="Hard" icon={DifficultyIconMap.Hard} />

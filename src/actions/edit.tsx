@@ -5,6 +5,7 @@ import { toggleTaskCompletionStatus, deleteTask, updateDueDate } from "../storag
 import { playSound } from "../sound";
 import { Task } from "../types";
 import { ChangeTags } from "./ChangeTags";
+import { ChangeLevel } from "./ChangeLevel";
 import { RenameTask } from "./RenameTask";
 type Props = {
   item: Task;
@@ -91,7 +92,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
       />
       <Action.Push
         title="Rename Task"
-        icon={Icon.Tag}
+        icon={Icon.Pencil}
         shortcut={{
           key: "r",
           modifiers: ["cmd", "shift"],
@@ -106,6 +107,15 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
           modifiers: ["cmd", "shift"],
         }}
         target={<ChangeTags item={item} refetchList={refetchList} />}
+      />
+      <Action.Push
+        title="Change Level"
+        icon={Icon.Stars}
+        shortcut={{
+          key: "l",
+          modifiers: ["cmd", "shift"],
+        }}
+        target={<ChangeLevel item={item} refetchList={refetchList} />}
       />
       <Action
         title="Delete Task"
