@@ -28,9 +28,9 @@ const Command = ({ initialSearchText }: Props) => {
 
   const { searchText, setSearchText, filteredItems } = useSearch(unfilteredItem, allTags, initialSearchText);
 
-  const incompleteTasks = filteredItems.filter((task) => !task.completed);
+  const pinnedTasks = filteredItems.filter((task) => task.pinned && !task.completed);
+  const incompleteTasks = filteredItems.filter((task) => !task.pinned && !task.completed);
   const completeTasks = filteredItems.filter((task) => task.completed);
-
   const [sortOrder, setSortOrder] = useState<SortOrder>("dueDate");
   const sortMethod = sortOrder === "dueDate" ? sortByDate : sortByLevel;
 
@@ -49,12 +49,17 @@ const Command = ({ initialSearchText }: Props) => {
         </List.Dropdown>
       }
     >
-      <List.Section title="Incomplete" subtitle={`${incompleteTasks.length} tasks`}>
+      <List.Section title="📌PinnedTasks" subtitle={`${pinnedTasks.length} tasks`}>
+        {pinnedTasks.sort(sortMethod).map((task) => (
+          <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
+        ))}
+      </List.Section>
+      <List.Section title="📝Incomplete" subtitle={`${incompleteTasks.length} tasks`}>
         {incompleteTasks.sort(sortMethod).map((task) => (
           <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
         ))}
       </List.Section>
-      <List.Section title="Done" subtitle={`${completeTasks.length} tasks`}>
+      <List.Section title="✅Done" subtitle={`${completeTasks.length} tasks`}>
         {completeTasks.sort(sortMethod).map((task) => (
           <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
         ))}

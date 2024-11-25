@@ -9,6 +9,7 @@ export type Task = {
   date: string | undefined;
   tags: string[];
   completed: boolean;
+  pinned: boolean;
 };
 
 export type Tag = {

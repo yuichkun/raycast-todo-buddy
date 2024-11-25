@@ -1,13 +1,13 @@
 import { Action, ActionPanel, Icon, showToast, Toast } from "@raycast/api";
 import { FC } from "react";
 import { getConfig } from "../config";
-import { toggleTaskCompletionStatus, deleteTask, updateDueDate } from "../storage";
 import { playSound } from "../sound";
+import { deleteTask, pinTask, toggleTaskCompletionStatus, unpinTask, updateDueDate } from "../storage";
 import { Task } from "../types";
-import { ChangeTags } from "./ChangeTags";
 import { ChangeLevel } from "./ChangeLevel";
-import { RenameTask } from "./RenameTask";
+import { ChangeTags } from "./ChangeTags";
 import { MultipleEdit } from "./MultipleEdit";
+import { RenameTask } from "./RenameTask";
 type Props = {
   item: Task;
   refetchList: () => void;
@@ -75,6 +75,14 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
       throw e;
     }
   };
+  const handlePin = async (task: Task) => {
+    if (task.pinned) {
+      await unpinTask(task.id);
+    } else {
+      await pinTask(task.id);
+    }
+    refetchList();
+  };
   return (
     <ActionPanel.Submenu title="Edit">
       <Action.Push
@@ -94,6 +102,15 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
           modifiers: ["cmd", "shift"],
         }}
         onAction={() => handleComplete(item)}
+      />
+      <Action
+        title={item.pinned ? "Unpin Task" : "Pin Task"}
+        icon={item.pinned ? Icon.TackDisabled : Icon.Tack}
+        shortcut={{
+          key: "p",
+          modifiers: ["cmd", "shift"],
+        }}
+        onAction={() => handlePin(item)}
       />
       <Action.PickDate
         title="Set Date"

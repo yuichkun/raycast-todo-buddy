@@ -101,3 +101,9 @@ export async function importDataFromJson(jsonStr: string) {
     await LocalStorage.setItem("tags", JSON.stringify(tags));
   }
 }
+
+export async function setPinTaskInStorage(taskId: string, pinned: boolean) {
+  const tasks = await getAllTasks();
+  const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, pinned } : task));
+  await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
+}

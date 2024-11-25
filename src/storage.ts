@@ -12,6 +12,7 @@ import {
   updateTaskInStorage,
   deleteTagInStorage,
   renameTagInStorage,
+  setPinTaskInStorage,
 } from "./repository/localStorage";
 import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
@@ -24,7 +25,15 @@ type CreateTaskArgs = {
 };
 export function createTask({ text, difficulty, date, tags }: CreateTaskArgs) {
   console.log("createTask", text, difficulty, date, tags);
-  return createTaskInStorage({ id: uuidv4(), text, difficulty, date, tags: tags ?? [], completed: false });
+  return createTaskInStorage({
+    id: uuidv4(),
+    text,
+    difficulty,
+    date,
+    tags: tags ?? [],
+    completed: false,
+    pinned: false,
+  });
 }
 
 export async function updateTask(taskId: string, newTask: Omit<Task, "id">) {
@@ -92,4 +101,14 @@ export async function deleteTag(tagId: string) {
 export async function updateLevel(taskId: string, level: string) {
   console.log("updateLevel", taskId, level);
   return changeDifficultyOfATaskInStorage(taskId, level);
+}
+
+export async function pinTask(taskId: string) {
+  console.log("pinTask", taskId);
+  return setPinTaskInStorage(taskId, true);
+}
+
+export async function unpinTask(taskId: string) {
+  console.log("unpinTask", taskId);
+  return setPinTaskInStorage(taskId, false);
 }
