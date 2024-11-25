@@ -49,7 +49,7 @@ const Command = ({ initialSearchText }: Props) => {
         </List.Dropdown>
       }
     >
-      <List.Section title="📌PinnedTasks" subtitle={`${pinnedTasks.length} tasks`}>
+      <List.Section title="📌Pinned" subtitle={`${pinnedTasks.length} tasks`}>
         {pinnedTasks.sort(sortMethod).map((task) => (
           <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
         ))}
