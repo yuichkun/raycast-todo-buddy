@@ -48,3 +48,8 @@ export function sortByLevel(a: Task, b: Task) {
 
   return aIndex - bIndex;
 }
+
+export function isPastDue(taskDueDate?: string) {
+  if (!taskDueDate) return false;
+  return moment(taskDueDate).startOf("day").isBefore(moment().startOf("day"));
+}

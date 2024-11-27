@@ -1,7 +1,7 @@
 import { Icon, List } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { useMemo, useState } from "react";
-import { sortByDate, sortByLevel } from "./date";
+import { isPastDue, sortByDate, sortByLevel } from "./date";
 import { useSearch } from "./hooks/useSearch";
 import { getAllTags, retrieveAllItems } from "./storage";
 import { TaskLineItem } from "./TaskLineItem";
@@ -10,6 +10,34 @@ type SortOrder = "dueDate" | "level";
 type Props = {
   initialSearchText?: string;
 };
+
+function categorizeTasks(tasks: Task[]) {
+  const categorizedTasks = {
+    outdatedTasks: [] as Task[],
+    pinnedTasks: [] as Task[],
+    incompleteTasks: [] as Task[],
+    completeTasks: [] as Task[],
+  };
+
+  for (const task of tasks) {
+    switch (true) {
+      case task.completed:
+        categorizedTasks.completeTasks.push(task);
+        break;
+      case isPastDue(task.date):
+        categorizedTasks.outdatedTasks.push(task);
+        break;
+      case task.pinned:
+        categorizedTasks.pinnedTasks.push(task);
+        break;
+      default:
+        categorizedTasks.incompleteTasks.push(task);
+        break;
+    }
+  }
+
+  return categorizedTasks;
+}
 const Command = ({ initialSearchText }: Props) => {
   const initialData = useMemo(() => {
     return [] as Task[];
@@ -28,9 +56,7 @@ const Command = ({ initialSearchText }: Props) => {
 
   const { searchText, setSearchText, filteredItems } = useSearch(unfilteredItem, allTags, initialSearchText);
 
-  const pinnedTasks = filteredItems.filter((task) => task.pinned && !task.completed);
-  const incompleteTasks = filteredItems.filter((task) => !task.pinned && !task.completed);
-  const completeTasks = filteredItems.filter((task) => task.completed);
+  const { outdatedTasks, pinnedTasks, incompleteTasks, completeTasks } = categorizeTasks(filteredItems);
   const [sortOrder, setSortOrder] = useState<SortOrder>("dueDate");
   const sortMethod = sortOrder === "dueDate" ? sortByDate : sortByLevel;
 
@@ -49,6 +75,11 @@ const Command = ({ initialSearchText }: Props) => {
         </List.Dropdown>
       }
     >
+      <List.Section title="⚠️ Outdated" subtitle={`${outdatedTasks.length} tasks`}>
+        {outdatedTasks.sort(sortMethod).map((task) => (
+          <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
+        ))}
+      </List.Section>
       <List.Section title="📌Pinned" subtitle={`${pinnedTasks.length} tasks`}>
         {pinnedTasks.sort(sortMethod).map((task) => (
           <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
