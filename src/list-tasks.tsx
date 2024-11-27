@@ -11,32 +11,42 @@ type Props = {
   initialSearchText?: string;
 };
 
-function categorizeTasks(tasks: Task[]) {
+function categorizeTasks(unfilteredTasks: Task[], filteredTasks: Task[]) {
+  type ExtendedTask = Task & {
+    isFiltered: boolean;
+  };
   const categorizedTasks = {
-    outdatedTasks: [] as Task[],
-    pinnedTasks: [] as Task[],
-    incompleteTasks: [] as Task[],
-    completeTasks: [] as Task[],
+    outdatedTasks: [] as ExtendedTask[],
+    pinnedTasks: [] as ExtendedTask[],
+    incompleteTasks: [] as ExtendedTask[],
+    completeTasks: [] as ExtendedTask[],
   };
 
-  for (const task of tasks) {
+  for (const task of unfilteredTasks) {
+    const isFiltered = filteredTasks.some((t) => t.id === task.id);
     switch (true) {
       case task.completed:
-        categorizedTasks.completeTasks.push(task);
+        categorizedTasks.completeTasks.push({ ...task, isFiltered });
         break;
       case isPastDue(task.date):
-        categorizedTasks.outdatedTasks.push(task);
+        // outdated tasks are always visible
+        categorizedTasks.outdatedTasks.push({ ...task, isFiltered: true });
         break;
       case task.pinned:
-        categorizedTasks.pinnedTasks.push(task);
+        categorizedTasks.pinnedTasks.push({ ...task, isFiltered });
         break;
       default:
-        categorizedTasks.incompleteTasks.push(task);
+        categorizedTasks.incompleteTasks.push({ ...task, isFiltered });
         break;
     }
   }
 
-  return categorizedTasks;
+  return {
+    outdatedTasks: categorizedTasks.outdatedTasks.filter((t) => t.isFiltered),
+    pinnedTasks: categorizedTasks.pinnedTasks.filter((t) => t.isFiltered),
+    incompleteTasks: categorizedTasks.incompleteTasks.filter((t) => t.isFiltered),
+    completeTasks: categorizedTasks.completeTasks.filter((t) => t.isFiltered),
+  };
 }
 const Command = ({ initialSearchText }: Props) => {
   const initialData = useMemo(() => {
@@ -45,7 +55,7 @@ const Command = ({ initialSearchText }: Props) => {
 
   const {
     isLoading: isAllItemLoading,
-    data: unfilteredItem,
+    data: unfilteredTasks,
     revalidate: refetchList,
   } = useCachedPromise(retrieveAllItems, [], {
     initialData,
@@ -54,9 +64,12 @@ const Command = ({ initialSearchText }: Props) => {
     initialData: [] as Tag[],
   });
 
-  const { searchText, setSearchText, filteredItems } = useSearch(unfilteredItem, allTags, initialSearchText);
+  const { searchText, setSearchText, filteredItems } = useSearch(unfilteredTasks, allTags, initialSearchText);
 
-  const { outdatedTasks, pinnedTasks, incompleteTasks, completeTasks } = categorizeTasks(filteredItems);
+  const { outdatedTasks, pinnedTasks, incompleteTasks, completeTasks } = categorizeTasks(
+    unfilteredTasks,
+    filteredItems,
+  );
   const [sortOrder, setSortOrder] = useState<SortOrder>("dueDate");
   const sortMethod = sortOrder === "dueDate" ? sortByDate : sortByLevel;
 
