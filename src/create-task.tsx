@@ -5,6 +5,7 @@ import { DifficultyColorMap, DifficultyIconMap } from "./constants";
 import ListTasks from "./list-tasks";
 import { createTask, getAllTags } from "./storage";
 import { Tag, Task } from "./types";
+import moment from "moment";
 export default function Command() {
   const { isLoading, data } = useCachedPromise(getAllTags, [], {
     initialData: [],
@@ -61,12 +62,12 @@ const CreateTodoForm: FC<Props> = ({ onCreate, tags, isLoading }) => {
       }
     >
       <Form.TextField id="text" title="Task Name" />
-      <Form.DatePicker id="date" title="Date" />
       <Form.TagPicker id="tags" title="Tags">
         {tags.map((tag) => (
           <Form.TagPicker.Item key={tag.id} value={tag.id} title={tag.name} />
         ))}
       </Form.TagPicker>
+      <Form.DatePicker id="date" title="Date" defaultValue={moment().startOf("day").toDate()} />
       <Form.Dropdown id="difficulty" title="Level" defaultValue="Trivial">
         <Form.Dropdown.Item
           value="Trivial"
