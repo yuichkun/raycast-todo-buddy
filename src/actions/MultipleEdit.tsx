@@ -29,6 +29,7 @@ export function MultipleEdit({ oldTask, refetchList }: MultipleEditProps) {
         date: localDateString,
         tags: task.tags,
         completed: oldTask.completed,
+        pinned: oldTask.pinned,
       });
       toast.style = Toast.Style.Success;
       toast.title = "Updated a Task";
