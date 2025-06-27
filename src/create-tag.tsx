@@ -6,7 +6,6 @@ import { createTag } from "./storage";
 export default function Command() {
   const { push } = useNavigation();
   async function onCreate(values: Record<string, string>) {
-    console.log("onCreate", values);
     const toast = await showToast({
       style: Toast.Style.Animated,
       title: "Creating a new Tag...",

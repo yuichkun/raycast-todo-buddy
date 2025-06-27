@@ -4,7 +4,6 @@ import { Tag, Task } from "../types";
 export async function getAllTasks(): Promise<Task[]> {
   const rawTasks = await LocalStorage.getItem<string>("tasks");
   const tasks = JSON.parse(rawTasks ?? "[]");
-  console.log("allTasks", tasks);
   return tasks;
 }
 
