@@ -50,6 +50,7 @@ Backup your tasks or migrate to another machine effortlessly using the `Export D
 - **List Tags** (`list-tags`): View all existing tags.
 - **Export Data** (`export-data`): Export all your tasks and tags to a JSON file.
 - **Import Data** (`import-data`): Import tasks and tags from a JSON file.
+- **Delete Completed Tasks** (`delete-completed`): Remove all tasks that are marked as done.
 
 ## 🔧 Installation
 

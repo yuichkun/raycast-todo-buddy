@@ -13,6 +13,7 @@ import {
   deleteTagInStorage,
   renameTagInStorage,
   setPinTaskInStorage,
+  deleteCompletedTasksInStorage,
 } from "./repository/localStorage";
 import { v4 as uuidv4 } from "uuid";
 import { Tag, Task } from "./types";
@@ -49,6 +50,10 @@ export async function toggleTaskCompletionStatus(taskId: string) {
 
 export async function deleteTask(taskId: string) {
   return deleteTaskInStorage(taskId);
+}
+
+export async function deleteCompletedTasks() {
+  return deleteCompletedTasksInStorage();
 }
 
 export async function renameTask(taskId: string, text: string) {

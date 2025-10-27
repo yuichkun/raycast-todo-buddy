@@ -45,6 +45,12 @@
       "title": "Import Tasks and Tags",
       "description": "imports tasks and tags from a json file",
       "mode": "view"
+    },
+    {
+      "name": "delete-completed",
+      "title": "Delete Completed Tasks",
+      "description": "deletes all completed tasks",
+      "mode": "no-view"
     }
   ],
   "preferences": [

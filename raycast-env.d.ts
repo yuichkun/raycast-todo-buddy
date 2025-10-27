@@ -28,6 +28,8 @@ declare namespace Preferences {
   export type ExportData = ExtensionPreferences & {}
   /** Preferences accessible in the `import-data` command */
   export type ImportData = ExtensionPreferences & {}
+  /** Preferences accessible in the `delete-completed` command */
+  export type DeleteCompleted = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
@@ -43,5 +45,7 @@ declare namespace Arguments {
   export type ExportData = {}
   /** Arguments passed to the `import-data` command */
   export type ImportData = {}
+  /** Arguments passed to the `delete-completed` command */
+  export type DeleteCompleted = {}
 }
 

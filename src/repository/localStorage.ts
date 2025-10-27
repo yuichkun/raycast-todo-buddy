@@ -31,6 +31,13 @@ export async function deleteTaskInStorage(taskId: string) {
   await LocalStorage.setItem("tasks", JSON.stringify(filteredTasks));
 }
 
+export async function deleteCompletedTasksInStorage() {
+  const tasks = await getAllTasks();
+  const filteredTasks = tasks.filter((task) => !task.completed);
+  await LocalStorage.setItem("tasks", JSON.stringify(filteredTasks));
+  return tasks.length - filteredTasks.length;
+}
+
 export async function renameTaskInStorage(taskId: string, text: string) {
   const tasks = await getAllTasks();
   const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, text } : task));
