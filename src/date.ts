@@ -49,6 +49,13 @@ export function sortByLevel(a: Task, b: Task) {
   return aIndex - bIndex;
 }
 
+export function sortByPinTime(a: Task, b: Task) {
+  if (a.pinned && b.pinned) {
+    return new Date(a.pinnedAt).getTime() - new Date(b.pinnedAt).getTime();
+  }
+  return 0;
+}
+
 export function isPastDue(taskDueDate?: string) {
   if (!taskDueDate) return false;
   return moment(taskDueDate).startOf("day").isBefore(moment().startOf("day"));

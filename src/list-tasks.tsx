@@ -1,7 +1,7 @@
 import { Icon, List } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { useMemo, useState } from "react";
-import { isPastDue, sortByDate, sortByLevel } from "./date";
+import { isPastDue, sortByDate, sortByLevel, sortByPinTime } from "./date";
 import { useSearch } from "./hooks/useSearch";
 import { getAllTags, retrieveAllItems } from "./storage";
 import { TaskLineItem } from "./TaskLineItem";
@@ -94,7 +94,7 @@ const Command = ({ initialSearchText }: Props) => {
         ))}
       </List.Section>
       <List.Section title="📌Pinned" subtitle={`${pinnedTasks.length} tasks`}>
-        {pinnedTasks.sort(sortMethod).map((task) => (
+        {pinnedTasks.sort(sortByPinTime).map((task) => (
           <TaskLineItem key={task.id} task={task} refetchList={refetchList} allTags={allTags} />
         ))}
       </List.Section>

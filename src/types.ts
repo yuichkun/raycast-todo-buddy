@@ -9,8 +9,10 @@ export type Task = {
   date: string | undefined;
   tags: string[];
   completed: boolean;
-  pinned: boolean;
-};
+} & (
+  | { pinned: false }
+  | { pinned: true; pinnedAt: string }
+);
 
 export type Tag = {
   name: string;

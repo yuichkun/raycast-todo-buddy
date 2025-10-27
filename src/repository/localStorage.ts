@@ -110,6 +110,15 @@ export async function importDataFromJson(jsonStr: string) {
 
 export async function setPinTaskInStorage(taskId: string, pinned: boolean) {
   const tasks = await getAllTasks();
-  const updatedTasks = tasks.map((task) => (task.id === taskId ? { ...task, pinned } : task));
+  const updatedTasks = tasks.map((task) => {
+    if (task.id === taskId) {
+      if (pinned) {
+        return { ...task, pinned: true as const, pinnedAt: new Date().toISOString() };
+      } else {
+        return { ...task, pinned: false as const };
+      }
+    }
+    return task;
+  });
   await LocalStorage.setItem("tasks", JSON.stringify(updatedTasks));
 }
