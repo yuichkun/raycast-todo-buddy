@@ -2,6 +2,7 @@ import { Action, ActionPanel, Grid, Icon, showToast, Toast } from "@raycast/api"
 import { useCachedPromise } from "@raycast/utils";
 
 import { nameToColor } from "./nameToColor";
+import { primaryActionModifier } from "./keyboard";
 import { deleteTag, getAllTags } from "./storage";
 import { Tag } from "./types";
 import { RenameTag } from "./RenameTag";
@@ -50,7 +51,7 @@ export default function Command() {
                   icon={Icon.Pencil}
                   shortcut={{
                     key: "r",
-                    modifiers: ["cmd", "shift"],
+                    modifiers: [primaryActionModifier, "shift"],
                   }}
                   target={<RenameTag tag={tag} revalidate={revalidate} />}
                 />
@@ -59,7 +60,7 @@ export default function Command() {
                   icon={Icon.List}
                   shortcut={{
                     key: "s",
-                    modifiers: ["cmd", "shift"],
+                    modifiers: [primaryActionModifier, "shift"],
                   }}
                   target={<ListTasks initialSearchText={tag.name} />}
                 />
@@ -69,7 +70,7 @@ export default function Command() {
                   style={Action.Style.Destructive}
                   shortcut={{
                     key: "delete",
-                    modifiers: ["cmd", "shift"],
+                    modifiers: [primaryActionModifier, "shift"],
                   }}
                   onAction={() => handleDelete(tag)}
                 />

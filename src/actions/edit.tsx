@@ -4,6 +4,7 @@ import { getConfig } from "../config";
 import { playSound } from "../sound";
 import { deleteTask, pinTask, toggleTaskCompletionStatus, unpinTask, updateDueDate } from "../storage";
 import { Task } from "../types";
+import { primaryActionModifier } from "../keyboard";
 import { ChangeLevel } from "./ChangeLevel";
 import { ChangeTags } from "./ChangeTags";
 import { MultipleEdit } from "./MultipleEdit";
@@ -90,7 +91,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         icon={Icon.Document}
         shortcut={{
           key: "e",
-          modifiers: ["cmd", "shift"],
+          modifiers: [primaryActionModifier, "shift"],
         }}
         target={<MultipleEdit oldTask={item} refetchList={refetchList} />}
       />
@@ -99,7 +100,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         icon={item.completed ? Icon.Circle : Icon.CheckCircle}
         shortcut={{
           key: "c",
-          modifiers: ["cmd", "shift"],
+          modifiers: [primaryActionModifier, "shift"],
         }}
         onAction={() => handleComplete(item)}
       />
@@ -108,7 +109,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         icon={item.pinned ? Icon.TackDisabled : Icon.Tack}
         shortcut={{
           key: "p",
-          modifiers: ["cmd", "shift"],
+          modifiers: [primaryActionModifier, "shift"],
         }}
         onAction={() => handlePin(item)}
       />
@@ -116,7 +117,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         title="Set Date"
         shortcut={{
           key: "d",
-          modifiers: ["cmd", "shift"],
+          modifiers: [primaryActionModifier, "shift"],
         }}
         onChange={(date) => {
           handleUpdateDate(item, date ?? undefined);
@@ -127,7 +128,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         icon={Icon.Pencil}
         shortcut={{
           key: "r",
-          modifiers: ["cmd", "shift"],
+          modifiers: [primaryActionModifier, "shift"],
         }}
         target={<RenameTask item={item} refetchList={refetchList} />}
       />
@@ -136,7 +137,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         icon={Icon.Tag}
         shortcut={{
           key: "t",
-          modifiers: ["cmd", "shift"],
+          modifiers: [primaryActionModifier, "shift"],
         }}
         target={<ChangeTags item={item} refetchList={refetchList} />}
       />
@@ -145,7 +146,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         icon={Icon.Stars}
         shortcut={{
           key: "l",
-          modifiers: ["cmd", "shift"],
+          modifiers: [primaryActionModifier, "shift"],
         }}
         target={<ChangeLevel item={item} refetchList={refetchList} />}
       />
@@ -155,7 +156,7 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         style={Action.Style.Destructive}
         shortcut={{
           key: "delete",
-          modifiers: ["cmd", "shift"],
+          modifiers: [primaryActionModifier, "shift"],
         }}
         onAction={() => handleDelete(item)}
       />
