@@ -4,7 +4,6 @@ import { getConfig } from "../config";
 import { playSound } from "../sound";
 import { deleteTask, pinTask, toggleTaskCompletionStatus, unpinTask, updateDueDate } from "../storage";
 import { Task } from "../types";
-import { primaryActionModifier } from "../keyboard";
 import { ChangeLevel } from "./ChangeLevel";
 import { ChangeTags } from "./ChangeTags";
 import { MultipleEdit } from "./MultipleEdit";
@@ -90,8 +89,8 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         title="Edit Task"
         icon={Icon.Document}
         shortcut={{
-          key: "e",
-          modifiers: [primaryActionModifier, "shift"],
+          macOS: { modifiers: ["cmd", "shift"], key: "e" },
+          windows: { modifiers: ["ctrl", "shift"], key: "e" },
         }}
         target={<MultipleEdit oldTask={item} refetchList={refetchList} />}
       />
@@ -99,8 +98,8 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         title={item.completed ? "Mark as Incomplete" : "Mark as Complete"}
         icon={item.completed ? Icon.Circle : Icon.CheckCircle}
         shortcut={{
-          key: "c",
-          modifiers: [primaryActionModifier, "shift"],
+          macOS: { modifiers: ["cmd", "shift"], key: "c" },
+          windows: { modifiers: ["ctrl", "shift"], key: "c" },
         }}
         onAction={() => handleComplete(item)}
       />
@@ -108,16 +107,16 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         title={item.pinned ? "Unpin Task" : "Pin Task"}
         icon={item.pinned ? Icon.TackDisabled : Icon.Tack}
         shortcut={{
-          key: "p",
-          modifiers: [primaryActionModifier, "shift"],
+          macOS: { modifiers: ["cmd", "shift"], key: "p" },
+          windows: { modifiers: ["ctrl", "shift"], key: "p" },
         }}
         onAction={() => handlePin(item)}
       />
       <Action.PickDate
         title="Set Date"
         shortcut={{
-          key: "d",
-          modifiers: [primaryActionModifier, "shift"],
+          macOS: { modifiers: ["cmd", "shift"], key: "d" },
+          windows: { modifiers: ["ctrl", "shift"], key: "d" },
         }}
         onChange={(date) => {
           handleUpdateDate(item, date ?? undefined);
@@ -127,8 +126,8 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         title="Rename Task"
         icon={Icon.Pencil}
         shortcut={{
-          key: "r",
-          modifiers: [primaryActionModifier, "shift"],
+          macOS: { modifiers: ["cmd", "shift"], key: "r" },
+          windows: { modifiers: ["ctrl", "shift"], key: "r" },
         }}
         target={<RenameTask item={item} refetchList={refetchList} />}
       />
@@ -136,8 +135,8 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         title="Change Tags"
         icon={Icon.Tag}
         shortcut={{
-          key: "t",
-          modifiers: [primaryActionModifier, "shift"],
+          macOS: { modifiers: ["cmd", "shift"], key: "t" },
+          windows: { modifiers: ["ctrl", "shift"], key: "t" },
         }}
         target={<ChangeTags item={item} refetchList={refetchList} />}
       />
@@ -145,8 +144,8 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         title="Change Level"
         icon={Icon.Stars}
         shortcut={{
-          key: "l",
-          modifiers: [primaryActionModifier, "shift"],
+          macOS: { modifiers: ["cmd", "shift"], key: "l" },
+          windows: { modifiers: ["ctrl", "shift"], key: "l" },
         }}
         target={<ChangeLevel item={item} refetchList={refetchList} />}
       />
@@ -155,8 +154,8 @@ export const TaskEditMenu: FC<Props> = ({ item, refetchList }) => {
         icon={Icon.DeleteDocument}
         style={Action.Style.Destructive}
         shortcut={{
-          key: "delete",
-          modifiers: [primaryActionModifier, "shift"],
+          macOS: { modifiers: ["cmd", "shift"], key: "delete" },
+          windows: { modifiers: ["ctrl", "shift"], key: "delete" },
         }}
         onAction={() => handleDelete(item)}
       />
